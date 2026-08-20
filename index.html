@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JJ Dev — Solutions numériques sur mesure</title>
+    <link rel="icon" type="image/x-icon" href="favicon.jpeg" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #0a1628;
+            --primary-light: #1a2a4a;
+            --gold: #c9a84c;
+            --gold-light: #e8d5a3;
+            --text-light: #f8f6f0;
+            --text-muted: #a0aec0;
+            --bg-light: #faf8f4;
+        }
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .text-gold {
+            color: var(--gold);
+        }
+        .text-gold-light {
+            color: var(--gold-light);
+        }
+        .border-gold {
+            border-color: var(--gold);
+        }
+        .bg-dark-premium {
+            background-color: var(--primary);
+        }
+        .bg-dark-premium-light {
+            background-color: var(--primary-light);
+        }
+        .gold-shine {
+            background: linear-gradient(135deg, #c9a84c 0%, #e8d5a3 50%, #c9a84c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-premium {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(201, 168, 76, 0.1);
+        }
+        .card-premium:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 60px rgba(10, 22, 40, 0.15);
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #c9a84c, #b8923a);
+            color: #0a1628;
+            font-weight: 600;
+            padding: 14px 36px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 168, 76, 0.3);
+        }
+        .btn-outline-gold {
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            font-weight: 600;
+            padding: 12px 34px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            background: transparent;
+        }
+        .btn-outline-gold:hover {
+            background: var(--gold);
+            color: var(--primary);
+        }
+        .nav-premium {
+            backdrop-filter: blur(20px);
+            background: rgba(10, 22, 40, 0.9);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+        }
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease-out;
+        }
+        .hero-gradient {
+            background: linear-gradient(160deg, #0a1628 0%, #1a2a4a 50%, #0a1628 100%);
+        }
+        .gold-line {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 2px;
+        }
+        .tech-tag {
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            color: var(--gold);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        .tech-tag:hover {
+            background: var(--gold);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="fixed top-0 w-full z-50 nav-premium">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white flex items-center gap-3">
+                <img src="assets/images/logo.jpeg" alt="JJ Dev" class="h-10 w-auto" />
+                <span><span class="text-gold">JJ</span> Dev</span>
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="text-white/80 hover:text-gold transition text-sm font-medium">Accueil</a>
+                <a href="#projects" class="text-white/80 hover:text-gold transition text-sm font-medium">Réalisations</a>
+                <a href="#services" class="text-white/80 hover:text-gold transition text-sm font-medium">Services</a>
+                <a href="#team" class="text-white/80 hover:text-gold transition text-sm font-medium">Équipe</a>
+                <a href="#process" class="text-white/80 hover:text-gold transition text-sm font-medium">Approche</a>
+                <a href="#contact" class="text-white/80 hover:text-gold transition text-sm font-medium">Contact</a>
+            </nav>
+            <div class="hidden md:block">
+                <a href="#contact" class="btn-gold text-sm px-6 py-2">Démarrer un projet</a>
+            </div>
+            <button id="mobileBtn" class="md:hidden text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-[#0a1628] px-6 py-4 border-t border-gold/10">
+            <div class="flex flex-col space-y-4">
+                <a href="#about" class="text-white/80 hover:text-gold transition">Accueil</a>
+                <a href="#projects" class="text-white/80 hover:text-gold transition">Réalisations</a>
+                <a href="#services" class="text-white/80 hover:text-gold transition">Services</a>
+                <a href="#team" class="text-white/80 hover:text-gold transition">Équipe</a>
+                <a href="#process" class="text-white/80 hover:text-gold transition">Approche</a>
+                <a href="#contact" class="text-white/80 hover:text-gold transition">Contact</a>
+                <a href="#contact" class="btn-gold text-center text-sm">Démarrer un projet</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="min-h-screen flex items-center hero-gradient pt-20">
+        <div class="container mx-auto px-6 py-20">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-up">
+                    <p class="text-gold font-semibold text-sm tracking-wider uppercase mb-4">JJ Dev — Solutions numériques</p>
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                        Nous concevons des<br />
+                        <span class="gold-shine">solutions numériques</span><br />
+                        qui transforment
+                    </h1>
+                    <p class="text-gray-300 text-lg mt-6 leading-relaxed max-w-lg">
+                        Logiciels sur mesure, applications web et solutions digitales 
+                        conçues pour répondre aux besoins réels de nos clients.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mt-8">
+                        <a href="#projects" class="btn-gold">Voir nos réalisations</a>
+                        <a href="#contact" class="btn-outline-gold">Démarrer un projet</a>
+                    </div>
+                </div>
+                <div class="flex justify-center" data-aos="fade-left">
+                    <div class="w-full max-w-sm bg-[#0a1628] rounded-2xl overflow-hidden border border-gold/20 shadow-2xl shadow-gold/10">
+                        <div class="aspect-square">
+                            <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+                                <source src="assets/images/demo-weddingsmarts.mp4" type="video/mp4">
+                                Votre navigateur ne supporte pas la vidéo.
+                            </video>
+                        </div>
+                        <div class="p-4 text-center border-t border-gold/10 bg-[#1a2a4a]/30">
+                            <p class="text-gold text-sm font-medium flex items-center justify-center gap-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                WeddingSmart — Aperçu
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 bg-[#faf8f4]">
+        <div class="container mx-auto px-6">
+
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-gold font-semibold text-sm tracking-wider uppercase">Notre travail</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-[#0a1628] mt-2">
+                    Des idées transformées en <span class="gold-shine">solutions</span>
+                </h2>
+                <div class="gold-line mx-auto mt-4"></div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-premium mb-8" data-aos="fade-up">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="p-8 md:p-12">
+                        <span class="text-gold font-semibold text-sm tracking-wider uppercase">● Projet phare</span>
+                        <h3 class="text-3xl md:text-4xl font-bold text-[#0a1628] mt-2">WeddingSmart</h3>
+                        <p class="text-gray-600 mt-4 leading-relaxed">
+                            Solution numérique destinée à moderniser la gestion et l'organisation 
+                            des mariages. Une application complète pour les futurs mariés et les organisateurs.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="tech-tag">Invitations électroniques</span>
+                            <span class="tech-tag">QR Code</span>
+                            <span class="tech-tag">Gestion des invités</span>
+                            <span class="tech-tag">Attribution des tables</span>
+                            <span class="tech-tag">Google Maps</span>
+                        </div>
+                        <a href="#" class="inline-block mt-6 text-gold font-semibold hover:underline">
+                            Découvrir WeddingSmart →
+                        </a>
+                    </div>
+                    <div class="bg-gradient-to-br from-[#1a2a4a] to-[#0a1628] p-8 flex items-center justify-center">
+                        <video class="w-full max-h-64 object-contain rounded-lg" 
+                               autoplay muted loop playsinline>
+                            <source src="assets/images/weddingsmart-demos.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la vidéo.
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg card-premium overflow-hidden mb-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="h-48 md:h-auto bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-6xl text-white">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="p-6 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-[#0a1628]">Mbokatalent</h3>
+                        <p class="text-gray-600 text-sm mt-2">
+                            Plateforme de recrutement en ligne. Mise en relation des candidats et recruteurs.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="tech-tag text-xs">PHP</span>
+                            <span class="tech-tag text-xs">MySQL</span>
+                            <span class="tech-tag text-xs">JavaScript</span>
+                        </div>
+                        <a href="https://jeanne2007.github.io/mbokatalent/" class="inline-block mt-4 text-gold font-semibold hover:underline text-sm">
+                            Voir le projet →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg card-premium overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="h-48 md:h-auto bg-gradient-to-r from-red-500 to-orange-500 flex items-center justify-center text-6xl text-white">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <div class="p-6 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-[#0a1628]">UpcDonat</h3>
+                        <p class="text-gray-600 text-sm mt-2">
+                            Site humanitaire pour enfants sans-abris. Gestion des dons et des initiatives locales.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="tech-tag text-xs">HTML/CSS</span>
+                            <span class="tech-tag text-xs">JavaScript</span>
+                            <span class="tech-tag text-xs">SQL</span>
+                        </div>
+                        <a href="https://jeanne2007.github.io/UpcDonat-copie/" class="inline-block mt-4 text-gold font-semibold hover:underline text-sm">
+                            Voir le projet →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="services" class="py-20 bg-[#0a1628]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-gold font-semibold text-sm tracking-wider uppercase">Nos services</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mt-2">
+                    Des solutions conçues autour de <span class="gold-shine">vos besoins</span>
+                </h2>
+                <div class="gold-line mx-auto mt-4"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-[#1a2a4a]/50 p-8 rounded-2xl border border-gold/10 hover:border-gold/30 transition card-premium" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-code text-2xl text-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Software Development</h3>
+                    <p class="text-gray-400 mt-2 leading-relaxed">Conception de logiciels de gestion personnalisés adaptés à votre activité.</p>
+                </div>
+                <div class="bg-[#1a2a4a]/50 p-8 rounded-2xl border border-gold/10 hover:border-gold/30 transition card-premium" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-globe text-2xl text-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Web Applications</h3>
+                    <p class="text-gray-400 mt-2 leading-relaxed">Création d'applications web modernes, responsives et performantes.</p>
+                </div>
+                <div class="bg-[#1a2a4a]/50 p-8 rounded-2xl border border-gold/10 hover:border-gold/30 transition card-premium" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-puzzle-piece text-2xl text-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Custom Solutions</h3>
+                    <p class="text-gray-400 mt-2 leading-relaxed">Développement de solutions adaptées aux besoins spécifiques de chaque client.</p>
+                </div>
+                <div class="bg-[#1a2a4a]/50 p-8 rounded-2xl border border-gold/10 hover:border-gold/30 transition card-premium" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-database text-2xl text-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Database Systems</h3>
+                    <p class="text-gray-400 mt-2 leading-relaxed">Conception et gestion de bases de données optimisées et sécurisées.</p>
+                </div>
+                <div class="bg-[#1a2a4a]/50 p-8 rounded-2xl border border-gold/10 hover:border-gold/30 transition card-premium" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-robot text-2xl text-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Digitalization</h3>
+                    <p class="text-gray-400 mt-2 leading-relaxed">Transformation de processus manuels en solutions numériques efficaces.</p>
+                </div>
+                <div class="bg-[#1a2a4a]/50 p-8 rounded-2xl border border-gold/10 hover:border-gold/30 transition card-premium" data-aos="fade-up" data-aos-delay="600">
+                    <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-sync-alt text-2xl text-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Maintenance & Evolution</h3>
+                    <p class="text-gray-400 mt-2 leading-relaxed">Amélioration et évolution des solutions existantes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="py-20 bg-[#faf8f4]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-gold font-semibold text-sm tracking-wider uppercase">Notre méthode</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-[#0a1628] mt-2">
+                    Notre <span class="gold-shine">approche</span>
+                </h2>
+                <div class="gold-line mx-auto mt-4"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-premium text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-gold">01</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0a1628]">Comprendre</h3>
+                    <p class="text-gray-600 mt-2">Nous analysons le besoin et les objectifs du client.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-premium text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-gold">02</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0a1628]">Concevoir</h3>
+                    <p class="text-gray-600 mt-2">Nous définissons l'architecture et l'expérience utilisateur.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-premium text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-gold">03</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0a1628]">Développer</h3>
+                    <p class="text-gray-600 mt-2">Nous transformons la conception en produit fonctionnel.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-premium text-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-gold">04</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0a1628]">Tester</h3>
+                    <p class="text-gray-600 mt-2">Nous vérifions la qualité, la sécurité et le fonctionnement.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-premium text-center" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-14 h-14 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-gold">05</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0a1628]">Déployer</h3>
+                    <p class="text-gray-600 mt-2">Nous mettons la solution à disposition des utilisateurs.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-premium text-center" data-aos="fade-up" data-aos-delay="600">
+                    <div class="w-14 h-14 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-gold">06</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-[#0a1628]">Évoluer</h3>
+                    <p class="text-gray-600 mt-2">Nous améliorons la solution selon les besoins futurs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="py-20 bg-[#0a1628]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-gold font-semibold text-sm tracking-wider uppercase">Notre équipe</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mt-2">
+                    Derrière <span class="gold-shine">JJ Dev</span>
+                </h2>
+                <div class="gold-line mx-auto mt-4"></div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-[#1a2a4a]/50 p-8 rounded-2xl border border-gold/10 text-center card-premium" data-aos="fade-right">
+                    <div class="w-32 h-32 rounded-full mx-auto mb-4 border-2 border-gold/30 overflow-hidden">
+                        <img src="assets/images/jeanne.jpeg" alt="Jeanne" class="w-full h-full object-cover" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Jeanne</h3>
+                    <p class="text-gold text-sm">Développeuse web</p>
+                    <p class="text-gray-400 mt-3 text-sm leading-relaxed">
+                        Passionnée par le développement web et les interfaces utilisateur. 
+                        Elle aime créer des expériences digitales élégantes et fonctionnelles.
+                    </p>
+                </div>
+                <div class="bg-[#1a2a4a]/50 p-8 rounded-2xl border border-gold/10 text-center card-premium" data-aos="fade-left">
+                    <div class="w-32 h-32 rounded-full mx-auto mb-4 border-2 border-gold/30 overflow-hidden">
+                        <img src="assets/images/jospin.jpeg" alt="Jospin" class="w-full h-full object-cover" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Jospin</h3>
+                    <p class="text-gold text-sm">Développeur back-end</p>
+                    <p class="text-gray-400 mt-3 text-sm leading-relaxed">
+                        Spécialiste des bases de données et des architectures logicielles. 
+                        Il assure la performance et la sécurité des applications.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="technologies" class="py-20 bg-[#faf8f4]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <p class="text-gold font-semibold text-sm tracking-wider uppercase">Notre stack</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-[#0a1628] mt-2">
+                    Technologies que nous <span class="gold-shine">utilisons</span>
+                </h2>
+                <div class="gold-line mx-auto mt-4"></div>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto" data-aos="fade-up">
+                <span class="tech-tag text-lg px-6 py-3">HTML5</span>
+                <span class="tech-tag text-lg px-6 py-3">CSS3</span>
+                <span class="tech-tag text-lg px-6 py-3">JavaScript</span>
+                <span class="tech-tag text-lg px-6 py-3">PHP</span>
+                <span class="tech-tag text-lg px-6 py-3">MySQL</span>
+                <span class="tech-tag text-lg px-6 py-3">Python</span>
+                <span class="tech-tag text-lg px-6 py-3">Git</span>
+                <span class="tech-tag text-lg px-6 py-3">GitHub</span>
+                <span class="tech-tag text-lg px-6 py-3">Bootstrap</span>
+                <span class="tech-tag text-lg px-6 py-3">Tailwind CSS</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="why" class="py-20 bg-[#0a1628]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-gold font-semibold text-sm tracking-wider uppercase">Pourquoi nous</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mt-2">
+                    Pourquoi choisir <span class="gold-shine">JJ Dev</span>
+                </h2>
+                <div class="gold-line mx-auto mt-4"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="text-center p-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-crown text-2xl text-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Solutions personnalisées</h3>
+                    <p class="text-gray-400 mt-2 text-sm leading-relaxed">
+                        Chaque projet est conçu selon les besoins spécifiques du client.
+                    </p>
+                </div>
+                <div class="text-center p-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-check text-2xl text-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Approche orientée utilisateur</h3>
+                    <p class="text-gray-400 mt-2 text-sm leading-relaxed">
+                        L'objectif est de créer des logiciels agréables à utiliser.
+                    </p>
+                </div>
+                <div class="text-center p-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-rocket text-2xl text-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Conception moderne</h3>
+                    <p class="text-gray-400 mt-2 text-sm leading-relaxed">
+                        Interfaces propres, responsives et adaptées aux appareils actuels.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-[#faf8f4]">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <p class="text-gold font-semibold text-sm tracking-wider uppercase">Contact</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-[#0a1628] mt-2">
+                    Vous avez un projet ? <span class="gold-shine">Construisons-le</span>
+                </h2>
+                <div class="gold-line mx-auto mt-4"></div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div class="bg-white p-8 rounded-2xl shadow-lg" data-aos="fade-right">
+                    <form id="contactForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-[#0a1628] mb-1">Nom complet</label>
+                            <input type="text" id="user_name" placeholder="Votre nom" required
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gold outline-none transition" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-[#0a1628] mb-1">Email</label>
+                            <input type="email" id="user_email" placeholder="Votre email" required
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gold outline-none transition" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-[#0a1628] mb-1">Téléphone</label>
+                            <input type="tel" id="user_phone" placeholder="Votre numéro"
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gold outline-none transition" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-[#0a1628] mb-1">Type de projet</label>
+                            <input type="text" id="project_type" placeholder="Ex: Application web, logiciel de gestion..."
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gold outline-none transition" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-[#0a1628] mb-1">Description du besoin</label>
+                            <textarea id="message" rows="4" placeholder="Décrivez votre projet..." required
+                                      class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gold outline-none transition resize-none"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-[#0a1628] mb-1">Budget (optionnel)</label>
+                            <input type="text" id="budget" placeholder="Ex: 50$ - 1000$"
+                                   class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gold outline-none transition" />
+                        </div>
+                        <button type="submit" id="submitBtn"
+                                class="w-full btn-gold text-center text-white text-base">
+                            Envoyer la demande
+                        </button>
+                        <div id="formStatus" class="hidden p-4 rounded-xl"></div>
+                    </form>
+                </div>
+                <div class="space-y-8" data-aos="fade-left">
+                    <div>
+                        <h3 class="text-2xl font-bold text-[#0a1628]">Nos coordonnées</h3>
+                        <div class="gold-line mt-2 mb-6"></div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition">
+                            <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center">
+                                <i class="fab fa-whatsapp text-2xl text-gold"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">WhatsApp</p>
+                                <p class="font-medium text-[#0a1628]">+243 0812475527</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition">
+                            <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-phone text-2xl text-gold"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Téléphone</p>
+                                <p class="font-medium text-[#0a1628]">+243 0812475527</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition">
+                            <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-envelope text-2xl text-gold"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Email</p>
+                                <p class="font-medium text-[#0a1628]">jeannengbo3@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-[#0a1628] uppercase tracking-wider mb-4">Suivez-nous</h4>
+                        <div class="flex gap-4">
+                            <a href="https://web.facebook.com/profile.php?id=61552770670983" target="_blank" class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-[#0a1628] transition">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a href="https://www.instagram.com/ngbojeanne/" target="_blank" class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-[#0a1628] transition">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@jeanne20072?lang=fr" target="_blank" class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-[#0a1628] transition">
+                                <i class="fab fa-tiktok text-xl"></i>
+                            </a>
+                            <a href="https://github.com/jeanne2007" target="_blank" class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-[#0a1628] transition">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                            <a href="https://wa.me/243812475527" target="_blank" class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-[#0a1628] transition">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#0a1628] py-8 px-6 border-t border-gold/10">
+        <div class="container mx-auto text-center">
+            <p class="text-2xl font-bold text-white">
+                <span class="text-gold">JJ</span> Dev
+            </p>
+            <p class="text-gray-500 text-sm mt-2">
+                &copy; 2026 JJ Dev. Solutions numériques sur mesure.
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        const mobileBtn = document.getElementById('mobileBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileBtn.querySelector('i');
+                icon.classList.replace('fa-times', 'fa-bars');
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section-hidden').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        const PUBLIC_KEY = "glmP56UUxxxbBP5fg";
+        const SERVICE_ID = "service_pudarj9";
+        const TEMPLATE_ID = "template_aoo4n8g";
+
+        emailjs.init(PUBLIC_KEY);
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const statusDiv = document.getElementById('formStatus');
+            
+            const email = document.getElementById('user_email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                statusDiv.className = 'p-4 rounded-xl bg-red-100 text-red-700';
+                statusDiv.innerHTML = '❌ Veuillez entrer une adresse email valide.';
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Envoi en cours...';
+            statusDiv.className = 'hidden';
+            
+            const params = {
+                user_name: document.getElementById('user_name').value.trim(),
+                user_email: email,
+                user_phone: document.getElementById('user_phone').value.trim() || 'Non renseigné',
+                project_type: document.getElementById('project_type').value.trim() || 'Non précisé',
+                message: document.getElementById('message').value.trim(),
+                budget: document.getElementById('budget').value.trim() || 'Non précisé',
+                current_date: new Date().toLocaleDateString('fr-FR'),
+                current_time: new Date().toLocaleTimeString('fr-FR')
+            };
+            
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
+            .then(function() {
+                statusDiv.className = 'p-4 rounded-xl bg-green-100 text-green-700';
+                statusDiv.innerHTML = '✅ Message envoyé avec succès !';
+                document.getElementById('contactForm').reset();
+            })
+            .catch(function() {
+                statusDiv.className = 'p-4 rounded-xl bg-red-100 text-red-700';
+                statusDiv.innerHTML = '❌ Erreur lors de l\'envoi. Réessayez.';
+            })
+            .finally(function() {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Envoyer la demande';
+            });
+        });
+    </script>
+</body>
+</html>
